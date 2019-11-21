@@ -27,7 +27,7 @@ Industry::Industry(const Settlement *settlement_, Product product_) : settlement
 
     savings = 0.0f;
 
-    market = settlement->markets.Get(product);
+    market = settlement->GetMarket(product);
 }
 
 void Industry::UpdateOutput()

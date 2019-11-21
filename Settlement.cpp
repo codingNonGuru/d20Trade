@@ -16,33 +16,6 @@ Settlement::Settlement(People people)
     SetupEconomy();
 }
 
-void Settlement::Print()
-{
-    //std::cout<<"Population: "<<population<<" people\n";
-
-    //std::cout<<"Workforce: "<<industry->workforce<<" people\n";
-
-    //std::cout<<"Demand: "<<demand<<" tons\n";
-
-    //std::cout<<"Offer: "<<offer<<" tons\n";
-
-    //std::cout<<"Price: "<<market->price<<" coins\n";
-
-    //std::cout<<"Value: "<<industry->value<<" coins\n";
-
-    //std::cout<<"Wages: "<<industry->wages<<" coins\n";
-
-    //std::cout<<"Innovation: "<<industry->innovation<<"\n";
-
-    //std::cout<<"Transaction: "<<industry->income<<" coins\n";
-
-    //std::cout<<"Per worker income: "<<industry->income / (float)industry->workforce<<" coins\n";
-
-    //std::cout<<"Industry Savings: "<<industry->savings<<" coins\n";
-
-    //std::cout<<"Population Savings: "<<savings<<" coins\n";
-}
-
 void Settlement::Update()
 {
     for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
@@ -85,4 +58,14 @@ void Settlement::SetupEconomy()
         auto market = markets.Allocate();
         *market = Market(this, *product);
     }
+}
+
+Industry* Settlement::GetIndustry(Product product) const
+{
+    return industries.Get((int)product);
+}
+
+Market* Settlement::GetMarket(Product product) const
+{
+    return markets.Get((int)product);
 }

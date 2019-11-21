@@ -1,8 +1,11 @@
 #pragma once
 
-struct Product
+#include <iostream>
+
+class Product
 {
-    operator int();
+public:
+    explicit operator int();
 
     operator const char *();
 

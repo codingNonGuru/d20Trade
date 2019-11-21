@@ -26,10 +26,12 @@ class Settlement
 
     Settlement();
 
+    Industry* GetIndustry(Product) const;
+
+    Market* GetMarket(Product) const;
+
 public:
     Settlement(People);
-
-    void Print();
 
     void Update();
 };

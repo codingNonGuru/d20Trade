@@ -9,8 +9,9 @@ Market::Market() {}
 
 Market::Market(const Settlement *settlement_, Product product_) : settlement(settlement_), product(product_)
 {
-    std::cout<<(const char*)product<<" market was created!\n";
-    industry = settlement->industries.Get(product);
+    std::cout<<product<<" market was created!\n";
+    //industry = settlement->industries.Get(product);
+    industry = settlement->GetIndustry(product);
 }
 
 void Market::Update()

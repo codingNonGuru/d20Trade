@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Product.hpp"
 #include "Economy.hpp"
 

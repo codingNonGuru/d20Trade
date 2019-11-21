@@ -8,6 +8,7 @@ const Product Products::FIBER = Product("Fiber");
 const Product Products::CLAY = Product("Clay");
 const Product Products::LUMBER = Product("Lumber");
 const Product Products::TOOLS = Product("Tools");
+const Product Products::CLOTH = Product("Cloth");
 
 Product Products::products[Products::capacity];
 
