@@ -4,7 +4,7 @@
 
 int main()
 {
-    Settlement liege;
+    Settlement liege(100);
 
     for(int i = 0; i < 20; ++i)
     {

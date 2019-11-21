@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Container/Array.hpp"
+
 #include "Economy.hpp"
 
 class Industry;
@@ -14,14 +16,18 @@ class Settlement
 
     friend class Population;
 
-    Industry* industry;
-
-    Market* market;
+    container::Array <Industry> industries;
+    
+    container::Array <Market> markets;
 
     Population* population;
 
-public:
+    void SetupEconomy();
+
     Settlement();
+
+public:
+    Settlement(People);
 
     void Print();
 

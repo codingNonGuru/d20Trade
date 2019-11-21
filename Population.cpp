@@ -13,9 +13,11 @@ Population::Population(const Settlement& parent) : settlement(parent)
 
 void Population::UpdateSavings()
 {
-    auto industry = settlement.industry;
+    auto& industries = settlement.industries;
+    for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
+    {
+        savings -= industry->income;
 
-    savings -= industry->income;
-
-    savings += industry->wages;
+        savings += industry->wages;
+    }
 }

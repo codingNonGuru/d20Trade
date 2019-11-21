@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Economy.hpp"
+#include "Product.hpp"
 
 class Settlement;
+class Industry;
 
 class Market
 {
@@ -10,7 +12,7 @@ class Market
 
     friend class Industry;
 
-    const Settlement& settlement;
+    const Settlement *settlement;
 
     Weight demand;
 
@@ -20,7 +22,14 @@ class Market
 
     Money price;
 
-    Market(const Settlement&);
+    Product product;
+
+    Industry* industry;
+
+    Market(const Settlement *, Product);
 
     void Update();
+
+public:
+    Market();
 };

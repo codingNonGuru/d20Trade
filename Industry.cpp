@@ -7,7 +7,9 @@
 #include "Market.hpp"
 #include "Population.hpp"
 
-Industry::Industry(const Settlement& parent) : settlement(parent)
+Industry::Industry() {}
+
+Industry::Industry(const Settlement *settlement_, Product product_) : settlement(settlement_), product(product_)
 {
     baseProductivity = 0.3f;
 
@@ -19,13 +21,13 @@ Industry::Industry(const Settlement& parent) : settlement(parent)
 
     value = 1.0f / productivity;
 
-    workforce = settlement.population->count / 10;
+    workforce = settlement->population->count / 10;
 
     storage = 0.0f;
 
-    //rawMaterials = 
-
     savings = 0.0f;
+
+    market = settlement->markets.Get(product);
 }
 
 void Industry::UpdateOutput()
@@ -37,9 +39,9 @@ void Industry::UpdateOutput()
 
 void Industry::UpdateIncome()
 {
-    income = settlement.market->order * settlement.market->price;
+    income = market->order * market->price;
 
-    wages = settlement.market->order * value;
+    wages = market->order * value;
 
     savings += income - wages;
 }
