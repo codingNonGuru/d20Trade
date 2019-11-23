@@ -10,17 +10,19 @@ Market::Market() {}
 Market::Market(const Settlement *settlement_, Product product_) : settlement(settlement_), product(product_)
 {
     std::cout<<product<<" market was created!\n";
-    //industry = settlement->industries.Get(product);
+
     industry = settlement->GetIndustry(product);
+
+    averagePrice = industry->value;
 }
 
 void Market::Update()
 {
     auto population = settlement->population;
 
-    float variationFactor = utility::GetRandom(0.9f, 1.1f);
+    float variationFactor = utility::GetRandom(0.99f, 1.01f);
 
-    demand = (float)population->count * population->need * variationFactor;
+    demand = (float)population->count * population->effectiveNeed * variationFactor;
 
     offer = industry->output;
 
@@ -28,7 +30,11 @@ void Market::Update()
 
     float priceSignal = demand / offer;
 
-    priceSignal = sqrt(priceSignal);
+    priceSignal = pow(priceSignal, 0.3f);
 
     price = industry->value * priceSignal;
+
+    averagePrice = (averagePrice + price * 0.1f) / 1.1f;
+
+    std::cout<<"The price of "<<product<<" is "<<averagePrice<<" coins\n";
 }

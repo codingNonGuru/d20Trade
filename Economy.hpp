@@ -16,11 +16,11 @@ class Products
 
 public:
     static const Product FOOD;
-    static const Product FIBER;
-    static const Product CLAY;
-    static const Product LUMBER;
-    static const Product TOOLS;
-    static const Product CLOTH;
+    //static const Product FIBER;
+    //static const Product CLAY;
+    //static const Product LUMBER;
+    //static const Product TOOLS;
+    //static const Product CLOTH;
 
     static const Product* GetFirst();
 

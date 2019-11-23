@@ -12,15 +12,29 @@ class Population
 
     friend class Industry;
 
-    Weight need;
+    const Weight baseNeed = 0.1f;
+
+    Weight effectiveNeed;
 
     People count;
 
     Money savings;
 
+    Money income;
+
+    Money spending;
+
+    Money averageIncome;
+
+    Money averageSpending;
+
     const Settlement& settlement;
 
     Population(const Settlement&);
 
+    void Setup();
+
     void UpdateSavings();
+
+    void UpdateNeed();
 };

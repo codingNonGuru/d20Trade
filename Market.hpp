@@ -22,6 +22,8 @@ class Market
 
     Money price;
 
+    Money averagePrice;
+
     Product product;
 
     Industry* industry;

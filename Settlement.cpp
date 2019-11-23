@@ -14,10 +14,14 @@ Settlement::Settlement(People people)
     population = new Population(*this);
 
     SetupEconomy();
+
+    population->Setup();
 }
 
 void Settlement::Update()
 {
+    population->UpdateNeed();
+
     for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
     {
         industry->UpdateOutput();

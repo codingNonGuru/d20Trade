@@ -50,6 +50,8 @@ class Industry
 
     void UpdateWorkforce();
 
+    //void UpdateProductivity();
+
 public:
     Industry();
 };
