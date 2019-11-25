@@ -63,7 +63,7 @@ void Settlement::SetupEconomy()
     for(auto product = Products::GetFirst(); product != Products::GetLast(); ++product)
     {
         auto industry = industries.Allocate();
-        *industry = Industry(this, *product);
+        *industry = Industry(this, product);
     }
 
     for(auto product = Products::GetFirst(); product != Products::GetLast(); ++product)
@@ -81,4 +81,27 @@ Industry* Settlement::GetIndustry(Product product) const
 Market* Settlement::GetMarket(Product product) const
 {
     return markets.Get((int)product);
+}
+
+void Settlement::Print() const
+{
+    population->Print();
+
+    for(auto market = markets.GetStart(); market != markets.GetEnd(); ++market)
+    {
+        std::cout<<market->product<<" costs "<<market->averagePrice<<" coins, ";
+    }
+    std::cout<<"\n";
+    for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
+    {
+        std::cout<<"The "<<*industry->product<<" industry hires "<<industry->workforce<<" people, ";
+    }
+    std::cout<<"\n";
+    for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
+    {
+        std::cout<<*industry->product<<" rentability is "<<industry->rentability<<", ";
+    }
+    std::cout<<"\n";
+    std::cout<<"\n";
+    //std::cout<<markets.GetMemorySize() + industries.GetMemorySize()<<"\n";
 }

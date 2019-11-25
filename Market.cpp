@@ -20,9 +20,9 @@ void Market::Update()
 {
     auto population = settlement->population;
 
-    float variationFactor = utility::GetRandom(0.99f, 1.01f);
+    float variationFactor = 1.0f;//utility::GetRandom(0.95f, 1.05f);
 
-    demand = (float)population->count * population->effectiveNeed * variationFactor;
+    demand = (float)population->count * population->GetNeed(product) * variationFactor;
 
     offer = industry->output;
 
@@ -35,6 +35,4 @@ void Market::Update()
     price = industry->value * priceSignal;
 
     averagePrice = (averagePrice + price * 0.1f) / 1.1f;
-
-    //std::cout<<"The price of "<<product<<" is "<<averagePrice<<" coins\n";
 }

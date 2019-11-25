@@ -4,17 +4,24 @@
 
 class Settlement;
 
-class Population
+class NeedHandler
+{
+    Weight effectiveNeeds[3];
+
+protected:
+    void SetNeed(const Product& product, Weight need);
+
+public:
+    Weight GetNeed(const Product& product) const;
+};
+
+class Population : NeedHandler
 {
     friend class Settlement;
 
     friend class Market;
 
     friend class Industry;
-
-    const Weight baseNeed = 0.1f;
-
-    Weight effectiveNeed;
 
     People count;
 
@@ -28,6 +35,8 @@ class Population
 
     Money averageExpenses;
 
+    float affordability;
+
     const Settlement& settlement;
 
     Population(const Settlement&);
@@ -37,4 +46,6 @@ class Population
     void UpdateSavings();
 
     void UpdateNeed();
+
+    void Print() const;
 };

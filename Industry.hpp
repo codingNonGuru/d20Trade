@@ -20,13 +20,11 @@ class Industry
 
     Money value;
 
-    Labor baseProductivity;
-
     float technology;
 
     float innovation;
 
-    Labor productivity;
+    Weight productivity;
 
     Weight storage;
     
@@ -40,13 +38,17 @@ class Industry
 
     Money averageWages;
 
+    Money averageDues;
+
+    float rentability;
+
     const Settlement *settlement;
 
-    Product product;
+    const Product *product;
 
     Market* market;
 
-    Industry(const Settlement *, Product);
+    Industry(const Settlement *, const Product *);
 
     void UpdateOutput();
 

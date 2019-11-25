@@ -9,36 +9,35 @@
 
 Industry::Industry() {}
 
-Industry::Industry(const Settlement *settlement_, Product product_) : settlement(settlement_), product(product_)
+Industry::Industry(const Settlement *settlement_, const Product *product_) : settlement(settlement_), product(product_)
 {
-    baseProductivity = 0.3f;
-
     technology = 1.5f;
     
     innovation = 1.0f;
 
-    productivity = baseProductivity * innovation;
+    productivity = product->GetProductivity() * innovation;
 
     value = 1.0f / productivity;
 
-    workforce = settlement->population->count / 10;
+    workforce = settlement->population->count / 5;
+    //workforce *= 4;
 
     storage = 0.0f;
 
     savings = 0.0f;
 
-    market = settlement->GetMarket(product);
+    market = settlement->GetMarket(*product);
 
-    wages = (float)workforce * productivity;
+    wages = (float)workforce * value;
 
-    averageWages = wages;
+    averageDues = wages;
 
     averageIncome = wages;
 }
 
 void Industry::UpdateOutput()
 {
-    float variationFactor = utility::GetRandom(0.99f, 1.01f);
+    float variationFactor = 1.0f;//utility::GetRandom(0.95f, 1.05f);
 
     output = (float)workforce * productivity * variationFactor;
 }
@@ -47,7 +46,8 @@ void Industry::UpdateIncome()
 {
     income = market->order * market->averagePrice;
 
-    wages = market->order * value;
+    auto dues = market->order * value;
+    wages = dues;
     if(wages > income)
     {
         auto difference = wages - income;
@@ -58,18 +58,18 @@ void Industry::UpdateIncome()
         wages = income + difference;
     }
 
-    averageWages = (averageWages + wages * 0.1f) / 1.1f;
+    averageDues = (averageDues + dues * 0.1f) / 1.1f;
 
     averageIncome = (averageIncome + income * 0.1f) / 1.1f;
 
     savings += income - wages;
 
-    std::cout<<product<<" producers have saved "<<savings<<" coins\n";
+    //std::cout<<*product<<" producers have saved "<<savings<<" coins\n";
 }
 
 void Industry::UpdateWorkforce()
 {
-    auto rentability = (averageIncome - averageWages) / averageIncome;
+    rentability = (averageIncome - averageDues) / averageIncome;
 
     if(rentability > 0.0f)
     {
@@ -81,27 +81,23 @@ void Industry::UpdateWorkforce()
     }
     else
     {
-        auto decreaseChance = pow(-rentability, 1.3f);
+        auto decreaseChance = pow(-rentability, 1.0f);
         if(utility::RollDice(decreaseChance) == true)
         {
             workforce--;
         }
     }
-
-    //std::cout<<product<<" rentability is "<<rentability<<"\n";
-
-    std::cout<<"The "<<product<<" industry has "<<workforce<<" workers\n";
 }
 
 void Industry::UpdateProductivity()
 {
     auto innovationGap = (technology - innovation) / technology;
 
-    innovation += 0.0035f;
+    //innovation += 0.0035f;
 
-    productivity = baseProductivity * innovation;
+    productivity = product->GetProductivity() * innovation;
 
     value = 1.0f / productivity;
 
-    innovation = pow(innovation, 0.995f);
+    //innovation = pow(innovation, 0.995f);
 }

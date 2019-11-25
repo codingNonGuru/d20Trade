@@ -5,15 +5,17 @@
 class Product
 {
 public:
-    explicit operator int();
+    explicit operator int() const;
 
-    operator const char *();
+    operator const char *() const;
 
     Product();
 
-    Product(const char *, Weight);
+    Product(const char *, Weight, Weight);
 
     Weight GetDailyNeed() const {return dailyNeed;}
+
+    Weight GetProductivity() const {return productivity;}
 
 private:
     int index;
@@ -21,4 +23,6 @@ private:
     const char *name;
 
     Weight dailyNeed;
+
+    Weight productivity;
 };

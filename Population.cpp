@@ -4,6 +4,16 @@
 #include "Settlement.hpp"
 #include "Industry.hpp"
 
+void NeedHandler::SetNeed(const Product& product, Weight need) 
+{
+    effectiveNeeds[(int)product] = need;
+}
+
+Weight NeedHandler::GetNeed(const Product& product) const 
+{
+    return effectiveNeeds[(int)product];
+}
+
 Population::Population(const Settlement& parent) : settlement(parent)
 {
     count = 100;
@@ -49,28 +59,39 @@ void Population::UpdateSavings()
     averageIncome = (averageIncome + income * 0.1f) / 1.1f;
 
     averageExpenses = (averageExpenses + expenses * 0.1f) / 1.1f;
-
-    std::cout<<"The population saved "<<savings<<" coins, earned "<<income<<" coins and spent "<<expenses<<" coins.\n";
 }
 
 void Population::UpdateNeed()
 {
-    auto affordability = averageIncome / averageExpenses;
+    affordability = averageIncome / averageExpenses;
     if(affordability > 1.0f)
     {
         affordability = 1.0f;
     }
     affordability = pow(affordability, 2.0f);
 
-    effectiveNeed = baseNeed * affordability;
-
-    auto sustainability = savings / averageExpenses;
-    if(sustainability < 3.0f)
+    if(averageExpenses > averageIncome)
     {
-        sustainability /= 3.0f;
+        auto sustainability = savings / (averageExpenses - averageIncome);
+        if(sustainability < 10.0f)
+        {
+            sustainability /= 10.0f;
 
-        effectiveNeed *= sustainability;
+            affordability *= sustainability;
+        }
     }
 
+    for(auto product = Products::GetFirst(); product != Products::GetLast(); ++product)
+    {
+        auto need = product->GetDailyNeed() * affordability;
+
+        SetNeed(*product, need);
+    }
+}
+
+void Population::Print() const
+{
     std::cout<<"Need factor is "<<affordability<<"\n";
+
+    std::cout<<"The population saved "<<savings<<" coins, earned "<<income<<" coins and spent "<<expenses<<" coins.\n";
 }

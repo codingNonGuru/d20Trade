@@ -2,7 +2,7 @@
 
 typedef float Weight;
 
-typedef float People;
+typedef int People;
 
 typedef float Money;
 
@@ -16,8 +16,8 @@ class Products
 
 public:
     static const Product FOOD; //Requires LAND as resource, TOOLS as materials
-    static const Product FIBER; //Requires LAND as resource, TOOLS as materials
-    static const Product LUMBER; //Requires WOODS as resource, TOOLS as materials
+    //static const Product FIBER; //Requires LAND as resource, TOOLS as materials
+    //static const Product LUMBER; //Requires WOODS as resource, TOOLS as materials
     //static const Product METAL; //Requires ORE as resource, TOOLS & LUMBER as materials
     //static const Product BRICKS; //Requires CLAY as resource, TOOLS & LUMBER as materials
     //static const Product TOOLS; //Requires TOOLS, METAL & LUMBER as materials

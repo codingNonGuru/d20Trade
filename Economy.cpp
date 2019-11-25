@@ -4,9 +4,9 @@
 int Products::productIndex = 0;
 
 //const Product Products::TOOLS = Product("Tools", 0.1f);
-const Product Products::FOOD = Product("Food", 0.3f);
-const Product Products::FIBER = Product("Fiber", 0.1f);
-const Product Products::LUMBER = Product("Lumber", 0.1f);
+const Product Products::FOOD = Product("Food", 0.2f, 0.3f);
+//const Product Products::FIBER = Product("Fiber", 0.1f, 0.3f);
+//const Product Products::LUMBER = Product("Lumber", 0.1f, 0.3f);
 /*const Product Products::BRICKS = Product("Bricks", 0.1f);
 const Product Products::WINE = Product("Lumber");
 const Product Products::METAL = Product("Lumber");

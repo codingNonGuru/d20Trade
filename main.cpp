@@ -6,10 +6,13 @@ int main()
 {
     Settlement liege(100);
 
-    for(int i = 0; i < 500; ++i)
+    for(int i = 0; i < 1000; ++i)
     {
         liege.Update();
-        std::cout<<"\n";
+        if(i % 10 == 0)
+        {
+            liege.Print();
+        }
     }
 
     return 0;

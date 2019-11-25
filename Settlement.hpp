@@ -34,4 +34,6 @@ public:
     Settlement(People);
 
     void Update();
+
+    void Print() const;
 };
