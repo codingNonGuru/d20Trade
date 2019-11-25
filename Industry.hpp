@@ -36,6 +36,10 @@ class Industry
 
     Money wages;
 
+    Money averageIncome;
+
+    Money averageWages;
+
     const Settlement *settlement;
 
     Product product;
@@ -50,7 +54,7 @@ class Industry
 
     void UpdateWorkforce();
 
-    //void UpdateProductivity();
+    void UpdateProductivity();
 
 public:
     Industry();

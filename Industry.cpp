@@ -29,14 +29,18 @@ Industry::Industry(const Settlement *settlement_, Product product_) : settlement
 
     market = settlement->GetMarket(product);
 
-    wages = (float)workforce * baseProductivity;
+    wages = (float)workforce * productivity;
+
+    averageWages = wages;
+
+    averageIncome = wages;
 }
 
 void Industry::UpdateOutput()
 {
     float variationFactor = utility::GetRandom(0.99f, 1.01f);
 
-    output = (float)workforce * baseProductivity * variationFactor;
+    output = (float)workforce * productivity * variationFactor;
 }
 
 void Industry::UpdateIncome()
@@ -44,6 +48,19 @@ void Industry::UpdateIncome()
     income = market->order * market->averagePrice;
 
     wages = market->order * value;
+    if(wages > income)
+    {
+        auto difference = wages - income;
+        if(difference > savings)
+        {
+            difference = savings;
+        }
+        wages = income + difference;
+    }
+
+    averageWages = (averageWages + wages * 0.1f) / 1.1f;
+
+    averageIncome = (averageIncome + income * 0.1f) / 1.1f;
 
     savings += income - wages;
 
@@ -52,7 +69,7 @@ void Industry::UpdateIncome()
 
 void Industry::UpdateWorkforce()
 {
-    auto rentability = (income - wages) / income;
+    auto rentability = (averageIncome - averageWages) / averageIncome;
 
     if(rentability > 0.0f)
     {
@@ -71,11 +88,20 @@ void Industry::UpdateWorkforce()
         }
     }
 
-    std::cout<<product<<" rentability is "<<rentability<<"\n";
-
-    auto innovationGap = (technology - innovation) / technology;
-
-    innovation = pow(innovation, 0.99f);
+    //std::cout<<product<<" rentability is "<<rentability<<"\n";
 
     std::cout<<"The "<<product<<" industry has "<<workforce<<" workers\n";
+}
+
+void Industry::UpdateProductivity()
+{
+    auto innovationGap = (technology - innovation) / technology;
+
+    innovation += 0.0035f;
+
+    productivity = baseProductivity * innovation;
+
+    value = 1.0f / productivity;
+
+    innovation = pow(innovation, 0.995f);
 }

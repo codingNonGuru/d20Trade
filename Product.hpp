@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include "Economy.hpp"
 
 class Product
 {
@@ -11,10 +11,14 @@ public:
 
     Product();
 
-    Product(const char * name_);
+    Product(const char *, Weight);
+
+    Weight GetDailyNeed() const {return dailyNeed;}
 
 private:
     int index;
 
     const char *name;
+
+    Weight dailyNeed;
 };

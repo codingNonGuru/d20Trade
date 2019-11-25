@@ -6,7 +6,7 @@ int main()
 {
     Settlement liege(100);
 
-    for(int i = 0; i < 200; ++i)
+    for(int i = 0; i < 500; ++i)
     {
         liege.Update();
         std::cout<<"\n";

@@ -30,11 +30,11 @@ void Market::Update()
 
     float priceSignal = demand / offer;
 
-    priceSignal = pow(priceSignal, 0.3f);
+    priceSignal = pow(priceSignal, 0.5f);
 
     price = industry->value * priceSignal;
 
     averagePrice = (averagePrice + price * 0.1f) / 1.1f;
 
-    std::cout<<"The price of "<<product<<" is "<<averagePrice<<" coins\n";
+    //std::cout<<"The price of "<<product<<" is "<<averagePrice<<" coins\n";
 }

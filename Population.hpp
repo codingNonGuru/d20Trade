@@ -22,11 +22,11 @@ class Population
 
     Money income;
 
-    Money spending;
+    Money expenses;
 
     Money averageIncome;
 
-    Money averageSpending;
+    Money averageExpenses;
 
     const Settlement& settlement;
 

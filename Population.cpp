@@ -23,51 +23,54 @@ void Population::Setup()
 
     averageIncome = income;
 
-    spending = income;
+    expenses = income;
 
-    averageSpending = spending;
-
-    /*auto& markets = settlement.markets;
-    for(auto market = markets.GetStart(); market != markets.GetEnd(); ++market)
-    {
-        spending += 
-    }*/
+    averageExpenses = expenses;
 }
 
 void Population::UpdateSavings()
 {
     income = 0.0f;
 
-    spending = 0.0f;
+    expenses = 0.0f;
 
     auto& industries = settlement.industries;
     for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
     {
         income += industry->wages;
 
-        spending += industry->income;
+        expenses += industry->income;
     }
 
     savings += income;
 
-    savings -= spending;
+    savings -= expenses;
 
     averageIncome = (averageIncome + income * 0.1f) / 1.1f;
 
-    averageSpending = (averageSpending + spending * 0.1f) / 1.1f;
+    averageExpenses = (averageExpenses + expenses * 0.1f) / 1.1f;
 
-    std::cout<<"The population saved "<<savings<<" coins, earned "<<income<<" coins and spent "<<spending<<" coins.\n";
+    std::cout<<"The population saved "<<savings<<" coins, earned "<<income<<" coins and spent "<<expenses<<" coins.\n";
 }
 
 void Population::UpdateNeed()
 {
-    auto subsistenceLevel = averageIncome / averageSpending;
-    if(subsistenceLevel > 1.0f)
+    auto affordability = averageIncome / averageExpenses;
+    if(affordability > 1.0f)
     {
-        subsistenceLevel = 1.0f;
+        affordability = 1.0f;
     }
-    subsistenceLevel = pow(subsistenceLevel, 2.0f);
+    affordability = pow(affordability, 2.0f);
 
-    effectiveNeed = baseNeed * subsistenceLevel;
-    std::cout<<"Need factor is "<<subsistenceLevel<<"\n";
+    effectiveNeed = baseNeed * affordability;
+
+    auto sustainability = savings / averageExpenses;
+    if(sustainability < 3.0f)
+    {
+        sustainability /= 3.0f;
+
+        effectiveNeed *= sustainability;
+    }
+
+    std::cout<<"Need factor is "<<affordability<<"\n";
 }

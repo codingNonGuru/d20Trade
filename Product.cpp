@@ -9,7 +9,7 @@ Product::operator const char *() {return name;}
 
 Product::Product() {}
 
-Product::Product(const char * name_) : name(name_)
+Product::Product(const char * name_, Weight dailyNeed_) : name(name_), dailyNeed(dailyNeed_)
 {
     index = Products::productIndex;
 

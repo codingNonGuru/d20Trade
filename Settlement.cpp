@@ -42,7 +42,16 @@ void Settlement::Update()
     for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
     {
         industry->UpdateWorkforce();
+
+        industry->UpdateProductivity();
     }
+
+    Labor labor = 0.0f;
+    for(auto industry = industries.GetStart(); industry != industries.GetEnd(); ++industry)
+    {
+        labor += industry->value * industry->market->order;
+    }
+    //std::cout<<"Labor amount is "<<labor<<"\n";
 }
 
 void Settlement::SetupEconomy()

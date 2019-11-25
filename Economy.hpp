@@ -15,12 +15,16 @@ class Products
     friend struct Product;
 
 public:
-    static const Product FOOD;
-    //static const Product FIBER;
-    //static const Product CLAY;
-    //static const Product LUMBER;
-    //static const Product TOOLS;
-    //static const Product CLOTH;
+    static const Product FOOD; //Requires LAND as resource, TOOLS as materials
+    static const Product FIBER; //Requires LAND as resource, TOOLS as materials
+    static const Product LUMBER; //Requires WOODS as resource, TOOLS as materials
+    //static const Product METAL; //Requires ORE as resource, TOOLS & LUMBER as materials
+    //static const Product BRICKS; //Requires CLAY as resource, TOOLS & LUMBER as materials
+    //static const Product TOOLS; //Requires TOOLS, METAL & LUMBER as materials
+    //static const Product CLOTH; //Requires TOOLS & FIBER as materials
+    //static const Product POTTERY; //Requires CLAY as resource, TOOLS as materials
+    //static const Product FURNITURE; //Requires TOOLS & LUMBER as materials
+    //static const Product BUILDING; //Requires TOOLS & LUMBER & BRICKS & METAL as materials
 
     static const Product* GetFirst();
 
@@ -31,7 +35,7 @@ public:
 private:
     static int productIndex;
 
-    static const int capacity = 16;
+    static const int capacity = 64;
 
     static Product products[capacity];
 };
