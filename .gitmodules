@@ -1,6 +1,0 @@
-[submodule "Container"]
-	path = Container
-	url = https://github.com/codingNonGuru/Container.git
-[submodule "FlumenTypes"]
-	path = FlumenTypes
-	url = https://github.com/codingNonGuru/FlumenTypes.git
