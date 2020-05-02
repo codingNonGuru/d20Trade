@@ -1,0 +1,3 @@
+/home/andrei/Documents/Code/Projects/d20Trade/CMakeFiles/rebuild_cache.dir
+/home/andrei/Documents/Code/Projects/d20Trade/CMakeFiles/d20Trade.dir
+/home/andrei/Documents/Code/Projects/d20Trade/CMakeFiles/edit_cache.dir
